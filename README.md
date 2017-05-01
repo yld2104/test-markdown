@@ -33,7 +33,9 @@ We model the attribute message as text because messages are more natural languag
 
 For example, the following would search through all messages that user has access to, in other words messages from conversations they are in, (in this case, Linda's) and return all messages that contain the lexemes provided ('league' in this case):
 
+``` SQL
 SELECT pm.id, c.id, message, sender FROM Private_Messages pm, Conversations c WHERE pm.conversationid = c.id AND members @> ARRAY['LindaDu']::varchar(15)[] AND to_tsvector(pm.message) @@ to_tsquery('league');
+```
 
 ```
  id | id |                                  message                                  | sender  
